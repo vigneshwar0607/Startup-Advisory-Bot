@@ -158,3 +158,55 @@ def test_gemini_generate_parses_and_adds_sources():
         lesson = gemini_client.generate_lesson("prompt")
     assert "rbi.org.in" in lesson.markdown
     assert post.call_args.kwargs["json"]["tools"] == [{"google_search": {}}]
+
+
+def test_telegram_sends_pdf_then_text(tmp_path):
+    from bot.senders import TelegramSender  # noqa: PLC0415
+    pdf = _run_dry(tmp_path)
+    env = {"TELEGRAM_BOT_TOKEN": "123:abc", "TELEGRAM_CHAT_ID": "111, @mychannel"}
+    with mock.patch.dict(os.environ, env), mock.patch("bot.senders.requests.post") as post:
+        post.return_value.status_code = 200
+        post.return_value.headers = {"content-type": "application/json"}
+        post.return_value.json.return_value = {"ok": True}
+        TelegramSender().send(parse_reply(FAKE_REPLY), 15, str(pdf))
+    urls = [c.args[0] for c in post.call_args_list]
+    assert urls[0].endswith("/sendDocument") and urls[1].endswith("/sendMessage")
+    assert post.call_args_list[2].kwargs["data"]["chat_id"] == "@mychannel"
+    assert len(post.call_args_list[0].kwargs["data"]["caption"]) <= 1000
+
+
+def test_email_message_has_pdf_and_bcc(tmp_path):
+    from bot.senders import EmailSender  # noqa: PLC0415
+    pdf = _run_dry(tmp_path)
+    env = {"EMAIL_USER": "me@gmail.com", "EMAIL_APP_PASSWORD": "abcd efgh ijkl mnop",
+           "EMAIL_TO": "me@gmail.com, friend@example.com"}
+    with mock.patch.dict(os.environ, env):
+        sender = EmailSender()
+        msg = sender.build(parse_reply(FAKE_REPLY), str(pdf))
+        assert sender.password == "abcdefghijklmnop"
+        assert "friend@example.com" in msg["Bcc"]
+        assert [p.get_filename() for p in msg.iter_attachments()] == ["day-015.pdf"]
+        with mock.patch("smtplib.SMTP") as smtp:
+            sender.send(parse_reply(FAKE_REPLY), 15, str(pdf))
+        smtp.return_value.__enter__.return_value.login.assert_called_once()
+
+
+def test_channel_selection_and_isolation():
+    from bot import senders  # noqa: PLC0415
+    clean = {k: "" for k in ("DELIVERY", "WHATSAPP_PROVIDER", "TELEGRAM_BOT_TOKEN", "EMAIL_APP_PASSWORD",
+                             "CALLMEBOT_APIKEY", "META_ACCESS_TOKEN")}
+    with mock.patch.dict(os.environ, {**clean, "TELEGRAM_BOT_TOKEN": "t", "EMAIL_APP_PASSWORD": "p"}):
+        assert senders.selected_channels() == ["telegram", "email"]
+    with mock.patch.dict(os.environ, {**clean, "DELIVERY": "email"}):
+        assert senders.selected_channels() == ["email"]
+    # one channel failing still lets the other send, then reports the failure
+    good, bad = mock.Mock(), mock.Mock()
+    bad.return_value.send.side_effect = RuntimeError("down")
+    with mock.patch.dict(os.environ, {**clean, "DELIVERY": "telegram,email"}), \
+         mock.patch.dict(senders.CHANNELS, {"telegram": (bad, "x"), "email": (good, "y")}):
+        try:
+            senders.send_all(parse_reply(FAKE_REPLY), 1, "x.pdf")
+            raise AssertionError("expected failure")
+        except RuntimeError as e:
+            assert "telegram" in str(e)
+    good.return_value.send.assert_called_once()
