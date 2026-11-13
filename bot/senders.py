@@ -1,4 +1,4 @@
-"""WhatsApp delivery: Meta WhatsApp Cloud API (official) or CallMeBot (free, own number only)."""
+"""WhatsApp delivery: CallMeBot (free, own number, text + PDF link) or Meta WhatsApp Cloud API (official, paid per message)."""
 import os
 import re
 import time
@@ -55,7 +55,7 @@ class MetaSender:
     def _post(self, payload: dict) -> requests.Response:
         return requests.post(f"{self.base}/messages", headers=self.headers, json=payload, timeout=TIMEOUT)
 
-    def send(self, lesson, day: int, pdf_path: str) -> None:
+    def send(self, lesson, day: int, pdf_path: str, link: str | None = None) -> None:  # noqa: ARG002
         media_id = self._upload_pdf(pdf_path)
         filename = os.path.basename(pdf_path)
         for to in self.to:
@@ -101,8 +101,11 @@ class CallMeBotSender:
         self.phone = os.environ["CALLMEBOT_PHONE"]
         self.apikey = os.environ["CALLMEBOT_APIKEY"]
 
-    def send(self, lesson, day: int, pdf_path: str) -> None:  # noqa: ARG002 (no attachments on CallMeBot)
-        parts = _chunks(lesson.whatsapp, 1500)
+    def send(self, lesson, day: int, pdf_path: str, link: str | None = None) -> None:  # noqa: ARG002
+        text = lesson.whatsapp
+        if link:  # CallMeBot can't attach files, so point to the PDF (index + full lesson) instead
+            text += f"\n\n*Full lesson + 90-day index (PDF):*\n{link}"
+        parts = _chunks(text, 1500)
         for i, part in enumerate(parts, 1):
             text = part if len(parts) == 1 else f"({i}/{len(parts)})\n{part}"
             r = requests.get(self.URL, timeout=TIMEOUT,
@@ -114,7 +117,7 @@ class CallMeBotSender:
 
 
 def get_sender():
-    provider = os.getenv("WHATSAPP_PROVIDER", "meta").lower()
+    provider = os.getenv("WHATSAPP_PROVIDER", "callmebot").lower()
     if provider == "meta":
         return MetaSender()
     if provider == "callmebot":

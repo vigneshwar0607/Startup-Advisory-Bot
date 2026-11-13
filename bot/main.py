@@ -78,11 +78,13 @@ def main(argv=None) -> int:
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--resend", action="store_true", help="send the archived lesson for --day without calling Claude")
     ap.add_argument("--index", action="store_true", help="only build lessons/course-index.pdf")
+    ap.add_argument("--generate-only", action="store_true",
+                    help="write and archive today's lesson but do not send (the workflow sends after pushing)")
     args = ap.parse_args(argv)
     dry = args.dry_run or os.getenv("DRY_RUN", "").lower() == "true"
 
     on = today_ist()
-    start = course_start(on, live=not dry and not args.index)
+    start = course_start(on, live=not dry and not args.index and not args.resend)
     day = args.day or day_number(start, on)
 
     from .render_pdf import markdown_to_pdf
@@ -97,26 +99,46 @@ def main(argv=None) -> int:
     erupee = erupee_box_topic(day)
     print(f"[info] Day {day} ({on}) — {module} — {mode}: {topic}\n[info] e₹ box: {erupee}")
 
-    if args.resend:
+    stem = ARCHIVE / f"day-{day:03d}"
+    if args.resend and stem.with_suffix(".json").exists():
         lesson = load_archived(day)
+        print(f"[info] using archived {stem.name}")
     else:
-        from .claude_client import generate_lesson
         from .prompt import build_user_prompt
         prompt = build_user_prompt(day, on.strftime("%d %B %Y"), topic, mode, module, erupee,
                                    quiz_context(day, mode))
-        lesson = generate_lesson(prompt)
-    stem = archive(day, lesson, on)
-
-    pdf_path = markdown_to_pdf(lesson.title, lesson.markdown, str(stem.with_suffix(".pdf")), current_day=day)
+        lesson = _load_generator()(prompt)
+        archive(day, lesson, on)
+    pdf_path = str(stem.with_suffix(".pdf"))
+    if not os.path.exists(pdf_path) or not args.resend:
+        markdown_to_pdf(lesson.title, lesson.markdown, pdf_path, current_day=day)
     print(f"[ok] archived {stem.name}.md / .pdf / .whatsapp.txt")
 
-    if dry:
-        print("[info] dry run — not sending.\n----- WhatsApp text -----\n" + lesson.whatsapp)
+    if dry or args.generate_only:
+        print("[info] not sending (dry run / generate-only).\n----- WhatsApp text -----\n" + lesson.whatsapp)
         return 0
 
     from .senders import get_sender
-    get_sender().send(lesson, day, pdf_path)
+    get_sender().send(lesson, day, pdf_path, pdf_link(day))
     return 0
+
+
+def _load_generator():
+    """AI_PROVIDER=gemini (free, default) or claude (paid)."""
+    if os.getenv("AI_PROVIDER", "gemini").lower() == "claude":
+        from .claude_client import generate_lesson
+    else:
+        from .gemini_client import generate_lesson
+    return generate_lesson
+
+
+def pdf_link(day: int) -> str | None:
+    """Public link to today's PDF in the repo (GitHub shows PDFs in the browser). Needs a public repo."""
+    base = os.getenv("LESSON_LINK_BASE")
+    if not base and os.getenv("GITHUB_REPOSITORY"):
+        branch = os.getenv("GITHUB_REF_NAME", "main")
+        base = f"https://github.com/{os.environ['GITHUB_REPOSITORY']}/blob/{branch}/lessons"
+    return f"{base.rstrip('/')}/day-{day:03d}.pdf" if base else None
 
 
 if __name__ == "__main__":
