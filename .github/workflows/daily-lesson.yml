@@ -9,11 +9,11 @@ on:
         description: "Force a day number (blank = today)"
         required: false
       dry_run:
-        description: "Generate but do not send"
+        description: "Generate but do not send (does not start the course clock)"
         type: boolean
         default: false
       resend:
-        description: "Resend the archived lesson for that day (no Claude call)"
+        description: "Resend the archived lesson for that day (no AI call)"
         type: boolean
         default: false
       index_only:
@@ -27,6 +27,23 @@ permissions:
 concurrency:
   group: daily-lesson
   cancel-in-progress: false
+
+env:
+  AI_PROVIDER: ${{ vars.AI_PROVIDER || 'gemini' }}            # gemini = free | claude = paid
+  GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+  GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+  ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+  CLAUDE_MODEL: ${{ vars.CLAUDE_MODEL }}
+  WHATSAPP_PROVIDER: ${{ vars.WHATSAPP_PROVIDER || 'callmebot' }}  # callmebot = free | meta = paid
+  CALLMEBOT_PHONE: ${{ secrets.CALLMEBOT_PHONE }}
+  CALLMEBOT_APIKEY: ${{ secrets.CALLMEBOT_APIKEY }}
+  META_ACCESS_TOKEN: ${{ secrets.META_ACCESS_TOKEN }}
+  META_PHONE_NUMBER_ID: ${{ secrets.META_PHONE_NUMBER_ID }}
+  META_TEMPLATE_NAME: ${{ vars.META_TEMPLATE_NAME || 'daily_lesson' }}
+  META_TEMPLATE_LANG: ${{ vars.META_TEMPLATE_LANG || 'en' }}
+  WHATSAPP_TO: ${{ secrets.WHATSAPP_TO }}
+  COURSE_START_DATE: ${{ vars.COURSE_START_DATE }}            # blank = Day 1 is the first real send
+  LESSON_LINK_BASE: ${{ vars.LESSON_LINK_BASE }}              # optional; default links to this repo's lessons/
 
 jobs:
   lesson:
@@ -45,32 +62,26 @@ jobs:
           sudo apt-get update -qq && sudo apt-get install -y -qq fonts-dejavu-core
           pip install -r requirements.txt
 
-      - name: Generate and send
-        env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          WHATSAPP_PROVIDER: ${{ vars.WHATSAPP_PROVIDER || 'meta' }}
-          META_ACCESS_TOKEN: ${{ secrets.META_ACCESS_TOKEN }}
-          META_PHONE_NUMBER_ID: ${{ secrets.META_PHONE_NUMBER_ID }}
-          META_TEMPLATE_NAME: ${{ vars.META_TEMPLATE_NAME || 'daily_lesson' }}
-          META_TEMPLATE_LANG: ${{ vars.META_TEMPLATE_LANG || 'en' }}
-          WHATSAPP_TO: ${{ secrets.WHATSAPP_TO }}
-          CALLMEBOT_PHONE: ${{ secrets.CALLMEBOT_PHONE }}
-          CALLMEBOT_APIKEY: ${{ secrets.CALLMEBOT_APIKEY }}
-          CLAUDE_MODEL: ${{ vars.CLAUDE_MODEL }}
-          COURSE_START_DATE: ${{ vars.COURSE_START_DATE }}   # blank = Day 1 is the first real send
+      - name: Write today's lesson
         run: |
-          ARGS=""
+          ARGS="--generate-only"
           if [ -n "${{ inputs.day }}" ]; then ARGS="$ARGS --day ${{ inputs.day }}"; fi
           if [ "${{ inputs.dry_run }}" = "true" ]; then ARGS="$ARGS --dry-run"; fi
           if [ "${{ inputs.resend }}" = "true" ]; then ARGS="$ARGS --resend"; fi
-          if [ "${{ inputs.index_only }}" = "true" ]; then ARGS="$ARGS --index"; fi
+          if [ "${{ inputs.index_only }}" = "true" ]; then ARGS="--index"; fi
           python -m bot.main $ARGS
 
-      - name: Commit lesson archive
-        if: always()
+      - name: Save lesson to the repo (so the PDF link works)
         run: |
           git config user.name "lesson-bot"
           git config user.email "lesson-bot@users.noreply.github.com"
           git add lessons/
           git diff --cached --quiet || git commit -m "Lesson archive $(TZ=Asia/Kolkata date +%F)"
-          git push || echo "push skipped"
+          git push
+
+      - name: Send on WhatsApp
+        if: ${{ inputs.dry_run != true && inputs.index_only != true }}
+        run: |
+          ARGS="--resend"
+          if [ -n "${{ inputs.day }}" ]; then ARGS="$ARGS --day ${{ inputs.day }}"; fi
+          python -m bot.main $ARGS
