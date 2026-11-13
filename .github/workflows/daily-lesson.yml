@@ -34,7 +34,13 @@ env:
   GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
   ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
   CLAUDE_MODEL: ${{ vars.CLAUDE_MODEL }}
-  WHATSAPP_PROVIDER: ${{ vars.WHATSAPP_PROVIDER || 'callmebot' }}  # callmebot = free | meta = paid
+  DELIVERY: ${{ vars.DELIVERY }}       # blank = every channel whose secrets are set (telegram, email, callmebot, meta)
+  WHATSAPP_PROVIDER: ${{ vars.WHATSAPP_PROVIDER }}
+  TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+  TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+  EMAIL_USER: ${{ secrets.EMAIL_USER }}
+  EMAIL_APP_PASSWORD: ${{ secrets.EMAIL_APP_PASSWORD }}
+  EMAIL_TO: ${{ secrets.EMAIL_TO }}
   CALLMEBOT_PHONE: ${{ secrets.CALLMEBOT_PHONE }}
   CALLMEBOT_APIKEY: ${{ secrets.CALLMEBOT_APIKEY }}
   META_ACCESS_TOKEN: ${{ secrets.META_ACCESS_TOKEN }}
@@ -79,7 +85,7 @@ jobs:
           git diff --cached --quiet || git commit -m "Lesson archive $(TZ=Asia/Kolkata date +%F)"
           git push
 
-      - name: Send on WhatsApp
+      - name: Send (Telegram / email / WhatsApp)
         if: ${{ inputs.dry_run != true && inputs.index_only != true }}
         run: |
           ARGS="--resend"
