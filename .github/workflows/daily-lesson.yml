@@ -1,0 +1,76 @@
+name: Daily Startup Advisory lesson
+
+on:
+  schedule:
+    - cron: "17 1 * * *"   # 06:47 IST every day (GitHub cron is UTC; runs can start a few minutes late)
+  workflow_dispatch:
+    inputs:
+      day:
+        description: "Force a day number (blank = today)"
+        required: false
+      dry_run:
+        description: "Generate but do not send"
+        type: boolean
+        default: false
+      resend:
+        description: "Resend the archived lesson for that day (no Claude call)"
+        type: boolean
+        default: false
+      index_only:
+        description: "Only rebuild lessons/course-index.pdf"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write   # to commit the lesson archive back to the repo
+
+concurrency:
+  group: daily-lesson
+  cancel-in-progress: false
+
+jobs:
+  lesson:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq fonts-dejavu-core
+          pip install -r requirements.txt
+
+      - name: Generate and send
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          WHATSAPP_PROVIDER: ${{ vars.WHATSAPP_PROVIDER || 'meta' }}
+          META_ACCESS_TOKEN: ${{ secrets.META_ACCESS_TOKEN }}
+          META_PHONE_NUMBER_ID: ${{ secrets.META_PHONE_NUMBER_ID }}
+          META_TEMPLATE_NAME: ${{ vars.META_TEMPLATE_NAME || 'daily_lesson' }}
+          META_TEMPLATE_LANG: ${{ vars.META_TEMPLATE_LANG || 'en' }}
+          WHATSAPP_TO: ${{ secrets.WHATSAPP_TO }}
+          CALLMEBOT_PHONE: ${{ secrets.CALLMEBOT_PHONE }}
+          CALLMEBOT_APIKEY: ${{ secrets.CALLMEBOT_APIKEY }}
+          CLAUDE_MODEL: ${{ vars.CLAUDE_MODEL }}
+          COURSE_START_DATE: ${{ vars.COURSE_START_DATE }}   # blank = Day 1 is the first real send
+        run: |
+          ARGS=""
+          if [ -n "${{ inputs.day }}" ]; then ARGS="$ARGS --day ${{ inputs.day }}"; fi
+          if [ "${{ inputs.dry_run }}" = "true" ]; then ARGS="$ARGS --dry-run"; fi
+          if [ "${{ inputs.resend }}" = "true" ]; then ARGS="$ARGS --resend"; fi
+          if [ "${{ inputs.index_only }}" = "true" ]; then ARGS="$ARGS --index"; fi
+          python -m bot.main $ARGS
+
+      - name: Commit lesson archive
+        if: always()
+        run: |
+          git config user.name "lesson-bot"
+          git config user.email "lesson-bot@users.noreply.github.com"
+          git add lessons/
+          git diff --cached --quiet || git commit -m "Lesson archive $(TZ=Asia/Kolkata date +%F)"
+          git push || echo "push skipped"
