@@ -64,7 +64,7 @@ def test_one_line_param():
 
 def _run_dry(tmp_path):
     with mock.patch.object(bot_main, "ARCHIVE", tmp_path), mock.patch.dict(os.environ, {"COURSE_START_DATE": ""}), \
-         mock.patch("bot.claude_client.generate_lesson", return_value=parse_reply(FAKE_REPLY)):
+         mock.patch.object(bot_main, "_load_generator", return_value=lambda prompt: parse_reply(FAKE_REPLY)):
         assert bot_main.main(["--day", "15", "--dry-run"]) == 0
     return tmp_path / "day-015.pdf"
 
@@ -99,8 +99,9 @@ def test_callmebot_chunks(tmp_path):
          mock.patch("bot.senders.time.sleep"):
         get.return_value.status_code = 200
         get.return_value.text = "Message queued"
-        CallMeBotSender().send(lesson, 15, "")
+        CallMeBotSender().send(lesson, 15, "", "https://github.com/u/r/blob/main/lessons/day-015.pdf")
     assert get.call_count >= 2
+    assert "day-015.pdf" in get.call_args_list[-1].kwargs["params"]["text"]
     assert all(len(c.kwargs["params"]["text"]) <= 1510 for c in get.call_args_list)
 
 
@@ -127,3 +128,33 @@ def test_first_live_run_sets_day_one(tmp_path):
     with mock.patch.object(bot_main, "ARCHIVE", tmp_path), mock.patch.dict(os.environ, {"COURSE_START_DATE": ""}):
         assert bot_main.course_start(date(2026, 11, 20), live=True) == date(2026, 11, 20)
         assert bot_main.course_start(date(2026, 11, 25), live=True) == date(2026, 11, 20)
+
+
+def test_pdf_link_and_gemini_model_pick():
+    with mock.patch.dict(os.environ, {"GITHUB_REPOSITORY": "vicky/startup-advisory-bot", "GITHUB_REF_NAME": "main",
+                                      "LESSON_LINK_BASE": ""}):
+        assert bot_main.pdf_link(3) == "https://github.com/vicky/startup-advisory-bot/blob/main/lessons/day-003.pdf"
+    from bot import gemini_client  # noqa: PLC0415
+    models = {"models": [
+        {"name": "models/gemini-2.5-flash", "supportedGenerationMethods": ["generateContent"]},
+        {"name": "models/gemini-3-flash-preview", "supportedGenerationMethods": ["generateContent"]},
+        {"name": "models/gemini-3-flash", "supportedGenerationMethods": ["generateContent"]},
+        {"name": "models/gemini-3-flash-lite", "supportedGenerationMethods": ["generateContent"]},
+        {"name": "models/gemini-3-pro", "supportedGenerationMethods": ["generateContent"]},
+    ]}
+    with mock.patch.dict(os.environ, {"GEMINI_MODEL": ""}), mock.patch("bot.gemini_client.requests.get") as get:
+        get.return_value.json.return_value = models
+        assert gemini_client.pick_model("k") == "gemini-3-flash"
+
+
+def test_gemini_generate_parses_and_adds_sources():
+    from bot import gemini_client  # noqa: PLC0415
+    reply = {"candidates": [{"content": {"parts": [{"text": FAKE_REPLY}]},
+                             "groundingMetadata": {"groundingChunks": [{"web": {"title": "rbi.org.in", "uri": "https://x"}}]}}]}
+    with mock.patch.dict(os.environ, {"GEMINI_API_KEY": "k", "GEMINI_MODEL": "gemini-3-flash"}), \
+         mock.patch("bot.gemini_client.requests.post") as post:
+        post.return_value.status_code = 200
+        post.return_value.json.return_value = reply
+        lesson = gemini_client.generate_lesson("prompt")
+    assert "rbi.org.in" in lesson.markdown
+    assert post.call_args.kwargs["json"]["tools"] == [{"google_search": {}}]
