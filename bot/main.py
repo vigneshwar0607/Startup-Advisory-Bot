@@ -118,8 +118,8 @@ def main(argv=None) -> int:
         print("[info] not sending (dry run / generate-only).\n----- WhatsApp text -----\n" + lesson.whatsapp)
         return 0
 
-    from .senders import get_sender
-    get_sender().send(lesson, day, pdf_path, pdf_link(day))
+    from .senders import send_all
+    send_all(lesson, day, pdf_path, pdf_link(day))
     return 0
 
 
