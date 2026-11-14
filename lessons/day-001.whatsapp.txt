@@ -1,0 +1,27 @@
+*Startup Advisory — Day 1: Services Map Beyond Audit & Tax*
+
+Most founders view a CA as a necessary evil for year-end audit, TDS returns, and GST filings. That mindset traps you in low-margin commodity work. Startups operate on burn rates, runway metrics, cap tables, and investor covenants. They need a transaction-ready advisor, not just a compliance clerk.
+
+*The Startup Advisory Map:*
+- *Stage 0 (Ideation & Entity Setup):* Choosing between LLP and Private Limited; founder agreements; initial capital structure; DPIIT recognition application.
+- *Stage 1 (Seed & Grants):* StartupTN seed grants (TANSEED), SISFS, setting up clean MIS, cap table tracking, and opening bank accounts.
+- *Stage 2 (Angel / Early VC):* Structuring convertible instruments (CCPS, convertible notes), Section 68 defense readiness, FEMA compliances (FC-GPR) if non-resident angels invest, data room preparation.
+- *Stage 3 (Scale & Retention):* ESOP scheme drafting, transfer pricing review, virtual CFO retainership, and preparation for Series A financial due diligence.
+
+*Indicative Market Fees (Indicative only):*
+- DPIIT Recognition & basic structuring: Rs. 15,000 – Rs. 35,000 (one-off)
+- Early-stage vCFO retainership: Rs. 20,000 – Rs. 50,000 / month
+- Due diligence readiness & Data Room setup: Rs. 50,000 – Rs. 1,500,000 (project basis)
+
+*Top Watch-out:*
+Do not let founders issue equity indiscriminately to friends and family at arbitrary share prices. Even though angel tax (old Section 56(2)(viib)) was abolished from Assessment Year 2025-26, unexplained cash credits under Section 68 and FEMA pricing guidelines still apply. Messy early equity issues kill institutional rounds later.
+
+*15-Minute Client-Getting Action:*
+Review your LinkedIn profile and firm website. Ensure your profile headline neutrally states your professional domain (e.g., "Chartered Accountant | Early-Stage Venture Compliance & Virtual CFO"). Under ICAI rules, avoid superlatives like "Leading Startup CA" or "Best Tax Expert".
+
+*Digital Rupee today:*
+RBI's Digital Rupee (e₹) is sovereign digital cash—a direct central bank liability, unlike bank deposits which carry commercial bank credit risk. For startups, watch programmable e₹: it enables smart-contract disbursements for grants and earmarked corporate expenses.
+
+*Key Sources:*
+- https://www.startupindia.gov.in
+- https://www.rbi.org.in
