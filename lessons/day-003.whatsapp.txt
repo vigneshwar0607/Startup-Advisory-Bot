@@ -1,0 +1,24 @@
+*Day 3: Entity Structuring — Pvt Ltd vs LLP vs OPC*
+
+If a client tells you, "We want an LLP now to save audit fees, and we will convert to a Private Limited once an investor writes a cheque," stop them immediately. Converting an LLP to a Private Limited under Chapter XXI of the Companies Act, 2013 takes months, attracts stamp duty, and carries tax exposure if Section 47 conditions are breached. 
+
+*Why institutional investors insist on a Private Limited Company:*
+- *Instruments:* VCs require Compulsorily Convertible Preference Shares (CCPS) with liquidation preference, anti-dilution, and conversion ratios. LLPs cannot issue CCPS or equity instruments.
+- *ESOPs:* LLPs cannot grant stock options under standard regulatory frameworks. Sweat equity and ESOP schemes are native to companies.
+- *FDI rules:* While 100% FDI is allowed in LLPs under the automatic route for sectors where 100% FDI is permitted without performance conditions, foreign investors cannot invest through hybrid debt/equity instruments (like CCPS) into an LLP.
+- *Exit routes:* Secondary share sales, drag-along, and IPO exits are built exclusively for corporate share capital.
+
+*Quick comparison:*
+- *Private Limited:* Mandatory statutory audit, strict compliance (DIR-3 KYC, AOC-4, MGT-7), corporate tax rate (22% plus surcharge/cess under Section 115BAA of the 1961 Act; verify corresponding section under Income-tax Act, 2025). Ideal for funding.
+- *LLP:* No mandatory audit if turnover < Rs 40 lakh and capital contribution < Rs 25 lakh. Taxed at flat 30% plus surcharge/cess. Profit share exempt in partners' hands. Ideal for bootstrapped, cash-flow services, or family businesses with no external funding plans.
+- *OPC:* Only one shareholder permitted. Cannot issue ESOPs to third parties, cannot onboard co-founders without conversion to a private company. Rarely suitable for venture-backed startups.
+
+*Indicative advisory fee:*
+₹15,000 to ₹35,000 for an entity structuring memo and cap-table roadmap (excluding incorporation filing fees and stamp duty).
+
+*Digital Rupee today:*
+No official RBI press releases on e₹ were issued in the last 30 days (unverified — check rbi.org.in). RBI's 2022 Concept Note established key CBDC design choices: a two-tier model (RBI issues to banks; banks distribute to public), token-based retail architecture (e₹-R) mimicking physical cash, and zero interest to avoid disintermediating bank deposits. For startups, understanding this two-tier flow is vital as payment aggregators prepare to embed programmable CBDC rails into merchant checkouts.
+
+*Sources:*
+- https://www.mca.gov.in
+- https://www.rbi.org.in
