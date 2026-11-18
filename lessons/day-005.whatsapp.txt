@@ -1,0 +1,26 @@
+*Startup Advisory — Day 5: Startup Tax Holiday, Loss Carry-Forward & ESOP Deferral*
+
+Many founders assume that getting a DPIIT registration certificate automatically makes their startup tax-free. That is incorrect and leads to severe tax demands during assessment.
+
+*1. DPIIT vs IMB Approval*
+- *DPIIT Recognition:* Easy to get online. Gives angel tax exemptions (where applicable historically) and self-certification under labor/environmental laws.
+- *Inter-Ministerial Board (IMB) Certificate:* Required for the 100% tax holiday (Section 80-IAC under the 1961 Act / provisions under Income-tax Act, 2025) and ESOP perquisite tax deferral. Very few startups actually apply for or receive IMB approval due to strict innovation criteria.
+
+*2. Key Tax Reliefs Demystified*
+- *Tax Holiday:* 100% tax deduction on profits for 3 consecutive financial years out of 10 years from incorporation. Annual turnover must not exceed Rs 100 crore in those years.
+- *Loss Carry-Forward (Section 79 equivalent):* Normal private companies lose accumulated business losses if more than 49% shareholding changes. For DPIIT startups, losses can be carried forward even after equity dilution, provided all original shareholders at the end of the loss year continue to hold shares in the year of set-off.
+- *ESOP Tax Deferral (Section 192 / 17(2)(vi) equivalent):* Perquisite tax on ESOP allotment is deferred for IMB-approved startups until the earliest of: (a) 48 months from the end of the relevant assessment year, (b) date of sale of shares, or (c) date the employee resigns.
+
+*3. Practical CA Service & Deliverables*
+- Service: IMB Certification Application & ESOP Deferral Compliance Architecture.
+- Deliverables: Eligibility audit report, pitch deck/innovation write-up alignment, Form 1 compilation on Startup India portal, and ESOP TDS tracking register for HR.
+- Fee range (indicative): Rs 30,000 – Rs 60,000 for IMB filing; Rs 20,000 – Rs 40,000 for ESOP tax structuring.
+
+*4. Digital Rupee today*
+No new RBI press releases on e-Rupee were published in the last 30 days as of 18 November 2026.
+_Concept: Two-tier distribution through banks._ RBI issues Digital Rupee to commercial banks (Tier 1), which then distribute it to end-users via digital wallets (Tier 2). RBI maintains currency integrity on its ledger, while banks handle customer KYC and wallet services.
+_Why it matters:_ Ensures instant, zero-clearing-risk payments between startups and vendors without relying on traditional payment gateway settlement cycles.
+
+Sources:
+https://www.startupindia.gov.in
+https://incometax.gov.in
