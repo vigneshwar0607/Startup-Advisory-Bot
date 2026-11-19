@@ -1,0 +1,31 @@
+*Startup Advisory — Day 6: Founders' Agreements & Vesting*
+(19 November 2026)
+
+If two founders split equity 50:50 on Day 1 and one leaves after three months, the remaining founder is left with half a company and an un-investable cap table. Investors call this "deadweight equity." Here is how you protect your startup clients.
+
+*1. What is Reverse Vesting?*
+- In India, founders are issued shares upfront at face value on incorporation to establish ownership and voting rights.
+- *Reverse vesting* means the company or remaining co-founders retain a contractual right to buy back those shares at nominal value (e.g., face value) if a founder exits early.
+- Typical standard: 4-year vesting with a 1-year cliff. Leaving at Month 8 means walking away with 0%. Leaving at Month 24 means keeping 50% of the allocated equity.
+
+*2. Good Leaver vs. Bad Leaver*
+- *Bad Leaver:* Resignation without board/founder consent, breach of agreement, fraud, or gross misconduct.
+  - Consequence: All unvested shares are repurchased at face value (or lower of cost vs fair market value). Often, remaining founders also hold a call option on vested shares at a deep discount.
+- *Good Leaver:* Permanent disability, death, or mutually agreed termination without cause.
+  - Consequence: Retains all vested shares; only unvested shares are repurchased at nominal cost.
+
+*3. The Indian Law Trap: Company Buybacks*
+- *Do not* draft the agreement requiring the *company* to buy back unvested shares.
+- Section 68 of the Companies Act, 2013 requires buybacks to be funded from free reserves or securities premium, supported by special resolutions and solvency declarations. Early-stage startups rarely have free reserves.
+- *Best Practice:* Give the *other founder(s)* or an Employee Welfare Trust the contractual call option to purchase unvested shares directly.
+
+*4. Practical CA Deliverable & Indicative Fees*
+- Review or co-draft the Founders' Agreement covering reverse vesting, IP assignment, decision deadlocks, and good/bad leaver clauses.
+- Indicative fee range: INR 25,000 to INR 60,000 depending on complexity.
+
+*Digital Rupee Today:*
+RBI issues the Digital Rupee (e₹) as a tokenized digital bearer instrument in exact denominations mirroring paper notes and coins (from ₹0.50 up to ₹500). Stored in non-custodial or bank-provided e₹ wallets, transactions settle instantly peer-to-peer on RBI's ledger without requiring clearing houses. For CAs, verifying corporate e₹ wallet balances will soon become a routine treasury and audit verification step.
+
+Sources:
+- Ministry of Corporate Affairs: https://www.mca.gov.in
+- Reserve Bank of India: https://www.rbi.org.in
