@@ -1,0 +1,34 @@
+*Startup Advisory — Day 8: AoA, SHA Clauses & Statutory Registers*
+
+Most first-time founders believe signing a Shareholders' Agreement (SHA) completes their legal obligations. Legally, under Indian company law, private arrangements in an SHA do not bind the company unless incorporated into its Articles of Association (AoA) (*V.B. Rangaraj* doctrine). When an investor's legal team begins due diligence, missing AoA amendments and neglected statutory registers stall funding rounds.
+
+*1. Critical Investor Clauses in SHA and AoA*
+- *Reserved Matters (Affirmative Voting):* A list of decisions (raising debt, changing capital structure, hiring CXOs) requiring investor consent.
+- *Transfer Restrictions:* Right of First Refusal (ROFR), Right of First Offer (ROFO), and Tag-Along rights (allowing investors to exit alongside founders).
+- *Drag-Along Rights:* Allows majority investors to force founders to sell their shares in an acquisition. Founders must negotiate minimum valuation floors.
+- *Liquidation Preference:* Dictates payout waterfall upon exit or winding up (typically 1x non-participating for early-stage institutional investors).
+- *Anti-Dilution:* Protects investors against down-rounds. Insist on "Broad-Based Weighted Average" rather than "Full Ratchet".
+- *Entrenchment Notice:* AoA must be amended under Section 5(6) of the Companies Act, 2013, filing Form MGT-14.
+
+*2. Mandatory Statutory Registers (Companies Act, 2013)*
+A startup must maintain these at its registered office from Day 1:
+- *Register of Members (MGT-1):* Updated within 7 days of allotment/transfer (Sec 88).
+- *Register of Directors and KMP:* Details and shareholding (Sec 170).
+- *Register of Significant Beneficial Owners (BEN-3):* Tracks ultimate natural owners holding 10%+ rights (Sec 90).
+- *Register of Loans, Guarantees & Securities (MBP-2):* Inter-corporate loans and investments (Sec 186).
+- *Register of Contracts with Interested Parties (MBP-4):* Director-related party contracts (Sec 189).
+
+*3. Advisory Opportunity for CAs*
+Offer an "Investor-Readiness Secretarial Audit":
+- Align existing SHA with AoA and file Form MGT-14.
+- Reconstruct and update statutory registers from bank statements and MCA filings.
+- Indicative fee range: INR 20,000 to INR 50,000 per exercise depending on round history.
+
+*Digital Rupee today*
+I found no specific new RBI press releases or data on the Digital Rupee published in the last 30 days.
+*Offline e₹:* Refers to peer-to-peer or peer-to-merchant CBDC transactions without internet connectivity, using hardware-based secure elements or NFC.
+*Relevance:* Enables retail and mobility startups to process micro-payments in offline environments; CAs must advise on offline ledger reconciliation and duplicate-spend safeguards.
+
+*Official Sources:*
+- MCA: https://www.mca.gov.in
+- RBI: https://www.rbi.org.in
