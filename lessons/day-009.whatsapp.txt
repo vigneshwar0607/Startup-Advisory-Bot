@@ -1,0 +1,37 @@
+*Startup Advisory — Day 9: Startup Compliance Calendar*
+
+Early-stage founders focus on product and fundraising while letting basic filings slip. Late fees, de-activated DINs, and lost DPIIT benefits follow quickly. Pitching an integrated compliance calendar converts ad-hoc work into predictable monthly retainer revenue.
+
+*Key Statutory Deadlines to Track:*
+- *ROC / MCA:*
+  - DPT-3 (Return of Deposits / Exempted Loans): 30 June
+  - DIR-3 KYC (Director KYC): 30 September
+  - AOC-4 (Financial Statements): within 30 days of AGM (usually 29/30 October)
+  - MGT-7 / 7A (Annual Return): within 60 days of AGM (usually 29 November)
+  - MSME-1: Half-yearly (30 April and 31 October) for outstanding payments over 45 days
+- *TDS / TCS:*
+  - Monthly tax deposit: 7th of next month (30 April for March)
+  - Quarterly returns (Form 24Q, 26Q, 27Q): 31 July, 31 October, 31 January, 31 May
+- *GST:*
+  - GSTR-1: 11th of every month (or 13th of month following quarter under QRMP)
+  - GSTR-3B: 20th of every month (or 22nd/24th under QRMP)
+  - GSTR-9 / 9C: 31 December
+- *Labour Laws & DPIIT:*
+  - PF & ESI remittances: 15th of every month
+  - Labour Law Self-Certification: Startups recognized by DPIIT can self-certify compliance for 6 central labour laws (like Gratuity, Contract Labour, EPF, ESI) via the Shram Suvidha portal for up to 5 years, shielding them from routine inspections
+  - DPIIT Portal: Keep registered office, director list, and cap table updated; watch the INR 100 crore turnover ceiling and 10-year incorporation window
+
+*The CA Service & Pricing:*
+Package this as a "Virtual Compliance Officer" retainer. Deliverables include a live dashboard, monthly filing receipts, and a quarterly compliance certificate for the Board.
+_Indicative market fee:_ INR 8,000 to INR 25,000 per month for early-stage private limited companies (scaled by transaction volume and headcount).
+
+*Today's 15-Minute Action:*
+Draft a neat, 1-page visual calendar of these core dates on your firm letterhead. Send it privately as an educational PDF to 3 startup founders in your personal network with a note: "Put together this quick-reference compliance schedule for FY 2026–27—hope it helps your team avoid last-minute penalties." (Complies with ICAI non-solicitation rules).
+
+*Digital Rupee Today:*
+No new RBI e₹ circulars or pilot statistics were released in the past 30 days (unverified — check official source).
+_Programmable e₹:_ RBI's programmable CBDC embeds smart-contract logic so funds can only be spent for predefined use cases (e.g., travel allowances, project grants). For startups, this enables automated expense control without cumbersome reimbursement workflows.
+
+Sources:
+- https://www.mca.gov.in
+- https://shramsuvidha.gov.in
