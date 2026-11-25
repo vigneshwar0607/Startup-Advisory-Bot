@@ -1,0 +1,36 @@
+*Startup Advisory — Day 12: Digital Rupee (e₹) 101*
+_25 November 2026 | Chennai CA Learning Series_
+
+*1. Today in one line*
+Digital Rupee (e₹) is sovereign cash in digital token form issued by RBI, providing instant settlement without commercial bank credit risk.
+
+*2. Key Concepts*
+- *e₹-R (Retail):* Used by individuals, startups, and merchants for P2P and P2M transactions via bank wallet apps.
+- *e₹-W (Wholesale):* Restricted to financial institutions for inter-bank settlement, call money market, and G-Sec secondary market trades.
+- *e₹ vs UPI:* UPI is a payment processing platform moving commercial bank money. e₹ IS the currency token itself (direct RBI liability). Transferring e₹ is instant token settlement.
+- *e₹ vs Crypto:* e₹ is RBI-issued legal tender. It is NOT a Virtual Digital Asset (VDA) and does not attract 30% VDA tax or 1% TDS under Section 194S.
+- *No Interest:* e₹ held in wallets earns zero interest to prevent bank disintermediation.
+
+*3. Practical CA Angle*
+- *Service:* Advisory on corporate e₹ wallet integration, treasury SOPs, and programmable payout workflows.
+- *Deliverable:* CBDC float management SOP, Chart of Accounts mapping, and treasury risk guidelines.
+- *Indicative Fee:* ₹15,000 – ₹35,000 per startup advisory engagement (indicative only).
+
+*4. Watch-outs*
+- Do not apply VDA (Crypto) tax provisions to e₹ transactions; e₹ is official legal tender.
+- Keep operational float optimized since e₹ wallet balances yield zero interest.
+- Ensure daily wallet balance reconciliation against company general ledger accounts.
+
+*5. Client-Getting Action (15 Mins)*
+Draft and publish an educational LinkedIn post (under 150 words) explaining the practical difference between UPI and e₹ for business treasury. Keep it strictly technical and professional per ICAI rules.
+
+*6. Quick Quiz*
+Q1: Does e₹-R earn interest? (Ans: No)
+Q2: Which e₹ variant handles G-Sec inter-bank settlement? (Ans: e₹-W)
+
+*Digital Rupee today*
+e₹-W enables real-time inter-bank settlement for wholesale operations without clearing-house counterparty risk. Understanding this helps CAs advise corporate clients as programmable escrow and instant corporate treasury tools mature.
+
+*Sources:*
+- RBI Web Portal: https://www.rbi.org.in
+- Income Tax Portal: https://www.incometax.gov.in
