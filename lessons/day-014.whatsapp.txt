@@ -1,0 +1,35 @@
+*Startup Advisory — Day 14: Week 2 Revision Quiz*
+
+Today is a catch-up day. We are consolidating everything from entity selection to the investor-ready data room.
+
+*1. The Concept Recap*
+Startups move through three phases: Setup (Entity, DPIIT), Governance (Founders' Agreement, SHA, Statutory Registers), and Scale (MIS, IP protection, and Funding). As a CA, you aren't just a tax filer; you are the "Due Diligence Officer" who ensures the startup doesn't collapse during an investor's audit.
+
+*2. Practical CA Angle*
+The primary service here is the *Pre-Funding Health Check*. You audit their ROC filings, IP assignments, and MIS accuracy.
+- *Indicative Fee:* Rs. 25,000 to Rs. 75,000 depending on the volume of transactions and complexity of the cap table.
+
+*3. Watch-outs*
+- Founders often forget to assign IP from their personal names to the Company.
+- Statutory registers (MGT-1, MBP-1) are usually blank in early-stage startups; this is a red flag for VCs.
+- Mixing personal and business expenses makes the MIS useless for valuation.
+
+*4. Quick Quiz (Test yourself)*
+1. Max age for DPIIT recognition? (10 years)
+2. What is ROFR? (Right of First Refusal)
+3. Best entity for VC funding? (Pvt Ltd)
+4. Tax rate on VDA (Crypto) gains? (30%)
+5. Frequency of startup MIS? (Monthly)
+6. Who should own the Trademark? (The Company)
+7. Standard vesting period? (4 years)
+8. Who issues the Digital Rupee? (RBI)
+9. Turnover limit for DPIIT? (Rs. 100 Cr)
+10. Clause that dictates who gets paid first in a sale? (Liquidation Preference)
+
+*5. Digital Rupee today*
+e₹ is a Central Bank Digital Currency (CBDC), a direct liability of the RBI. Unlike Stablecoins (private fiat-pegged tokens) or Crypto (decentralized assets), e₹ is legal tender. Under the Income-tax Act, 1961, Crypto/Stablecoins are Virtual Digital Assets (VDAs) taxed at 30%, whereas e₹ is simply digital cash.
+
+*6. Today's Action*
+Spend 15 minutes updating your LinkedIn "About" section to include "Startup Advisory" and "Investor Readiness" to signal your niche without direct solicitation.
+
+Sources: startupindia.gov.in, rbi.org.in
